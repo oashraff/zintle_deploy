@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+dist/
+build/
+.prisma/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+.DS_Store
