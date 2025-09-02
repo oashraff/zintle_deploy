@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./zintle.db"
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  responses   Response[]
+  
+  @@map("users")
+}
+
+model Response {
+  id          String   @id @default(uuid())
+  userId      String
+  question    String
+  answer      String
+  questionId  String
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@map("responses")
+}
+
+model Analytics {
+  id          String   @id @default(uuid())
+  metric      String
+  value       Int
+  date        DateTime @default(now())
+  
+  @@map("analytics")
+}
